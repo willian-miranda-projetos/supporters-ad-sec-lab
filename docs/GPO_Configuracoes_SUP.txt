@@ -1,0 +1,291 @@
+========================================
+PROJETO: SUPPORTERS - ACTIVE DIRECTORY
+DOCUMENTAÇÃO DE GPOs
+====================
+
+---
+
+## GPO: GPO_USERS_BASICA
+
+Caminho:
+User Configuration > Policies > Administrative Templates > Control Panel
+
+Configuração:
+Show only specified Control Panel items
+
+Valor:
+Enabled
+
+Itens permitidos:
+
+* Microsoft.DevicesAndPrinters
+* Microsoft.Bluetooth
+* Microsoft.ProgramsAndFeatures
+* Microsoft.Language
+* Microsoft.RegionAndLanguage
+* Microsoft.NetworkAndSharingCenter
+
+---
+
+## GPO: GPO_USERS_RESTRICOES_INTELIGENTES
+
+Caminho:
+User Configuration > Policies > Administrative Templates > System
+
+Configuração:
+Prevent access to command prompt
+
+Valor:
+Enabled
+Disable script processing: Yes
+
+---
+
+Caminho:
+User Configuration > Policies > Administrative Templates > System
+
+Configuração:
+Prevent access to registry editing tools
+
+Valor:
+Enabled
+
+---
+
+## GPO: GPO_COMPUTADORES_HARDENING_LEVE
+
+Caminho:
+Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options
+
+Configuração:
+Microsoft network client: Digitally sign communications (always)
+
+Valor:
+Enabled
+
+---
+
+Configuração:
+Microsoft network server: Digitally sign communications (always)
+
+Valor:
+Enabled
+
+---
+
+Configuração:
+Interactive logon: Number of previous logons to cache
+
+Valor:
+1
+
+---
+
+## GPO: GPO_AUDITORIA_SEGURANCA
+
+Caminho:
+Computer Configuration > Policies > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Audit Policies > Logon/Logoff
+
+Configuração:
+Audit Logon
+
+Valor:
+Success and Failure
+
+---
+
+Caminho:
+Account Logon
+
+Configuração:
+Audit Credential Validation
+
+Valor:
+Success and Failure
+
+---
+
+Caminho:
+Privilege Use
+
+Configuração:
+Audit Sensitive Privilege Use
+
+Valor:
+Success and Failure
+
+---
+
+Caminho:
+Policy Change
+
+Configuração:
+Audit Policy Change
+
+Valor:
+Success and Failure
+
+---
+
+Caminho:
+Detailed Tracking
+
+Configuração:
+Audit Process Creation
+
+Valor:
+Success
+
+---
+
+Caminho:
+Computer Configuration > Policies > Administrative Templates > System > Audit Process Creation
+
+Configuração:
+Include command line in process creation events
+
+Valor:
+Enabled
+
+---
+
+## GPO: GPO_ADMIN_LOCAL_ATIVACAO
+
+Objetivo:
+Garantir que a conta de administrador local esteja ativa para uso com LAPS
+
+Caminho:
+Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options
+
+Configuração:
+Accounts: Administrator account status
+
+Valor:
+Enabled
+
+---
+
+Observação:
+
+Essa configuração é essencial para o funcionamento do Windows LAPS.
+
+Sem a conta de administrador local ativa:
+
+* O LAPS não consegue gerenciar a senha
+* A rotação de senha não ocorre
+* O atributo msLAPS-Password não é atualizado no Active Directory
+
+Essa GPO deve ser aplicada em todas as máquinas do domínio (OU de computadores).
+
+---
+
+
+## GPO: GPO_LAPS_ADMIN_LOCAL
+
+Caminho:
+Computer Configuration > Policies > Administrative Templates > System > LAPS
+
+Configuração:
+Configure password backup directory
+
+Valor:
+Enabled (Active Directory)
+
+---
+
+Configuração:
+Name of administrator account to manage
+
+Valor:
+Enabled (Administrator)
+
+---
+
+Configuração:
+Password Settings
+
+Valor:
+Enabled
+Password Length: 12
+Password Age: 7 days
+Complexity: Enabled
+
+---
+
+Configuração:
+Enable password encryption
+
+Valor:
+Enabled
+
+---
+
+## GPO: GPO_NTLM_AUDIT
+
+Caminho:
+Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options
+
+Configuração:
+Network security: Restrict NTLM: Audit NTLM authentication in this domain
+
+Valor:
+Enable all
+
+---
+
+Configuração:
+Network security: Restrict NTLM: Audit Incoming NTLM Traffic
+
+Valor:
+Enable auditing for all accounts
+
+---
+
+## GPO: GPO_NTLM_BLOCK
+
+Caminho:
+Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options
+
+Configuração:
+Network security: Restrict NTLM: NTLM authentication in this domain
+
+Valor:
+Deny for domain accounts
+
+---
+
+## GPO: GPO_AUDITORIA_BASICA
+
+Caminho:
+Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options
+
+Configuração:
+Audit: Force audit policy subcategory settings to override audit policy category settings
+
+Valor:
+Enabled
+
+---
+
+## DEFAULT DOMAIN POLICY
+
+Caminho:
+Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Password Policy
+
+Configuração:
+Minimum password length
+
+Valor:
+10
+
+---
+
+Configuração:
+Password must meet complexity requirements
+
+Valor:
+Enabled
+
+========================================
+FIM DA DOCUMENTAÇÃO
+===================
