@@ -41,14 +41,26 @@ Este ambiente simula a infraestrutura de uma empresa fictícia chamada **Support
 
 ```
 SUPPORTERS
-├── Financeiro
-├── RH
-├── TI
+(SUP.LOCAL)
+├── ADMIN
+│   ├── Admins de Dominio
+│   └── Admins de Servidores
 ├── COMPUTADORES
+│   ├── Financeiro
+│   ├── RH
+│   └── TI
+├── CONTAS DE SERVIÇO
+│   ├── Distribuição
+│   └── Segurança
 ├── SERVIDORES
-├── GRUPOS
-│   ├── SEGURANCA
-│   └── DISTRIBUICAO
+│   ├── Application Servers
+│   ├── Domain Controllers
+│   └── File Servers
+├── SUPPORTERS
+│   ├── Financeiro
+│   ├── RH
+│   └── TI
+
 ```
 
 ---
